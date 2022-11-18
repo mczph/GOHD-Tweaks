@@ -1,43 +1,35 @@
 package hiiragi283.gohd_tweaks;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import hiiragi283.gohd_tweaks.init.ItemRagi;
+import hiiragi283.gohd_tweaks.proxy.CommonProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.SidedProxy;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = GOHDTweaks.MOD_ID, name = GOHDTweaks.MOD_NAME, version = GOHDTweaks.VERSION)
-public class GOHDTweaks
-{
-    public static final String MOD_ID = "gohd_tweaks";
-    public static final String MOD_NAME = "GOHD Tweaks";
-    public static final String VERSION = "v0.0.1";
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+public class GOHDTweaks {
 
     private static Logger logger;
 
-    public static final Item ItemRagiTicket = new ItemRagi("ragi_ticket");
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    public static CommonProxy proxy;
 
     @Mod.EventHandler
-    public void construct(FMLConstructionEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
+    public void preInit(FMLPreInitializationEvent event) {
+        ItemRagi.init();
+        ItemRagi.register();
     }
 
-    @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(ItemRagiTicket);
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.registerRenders();
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void registerModels(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(ItemRagiTicket, 0, new ModelResourceLocation(new ResourceLocation("gohd_tweaks", "ragi_ticket"), "inventory"));
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+
     }
 }
