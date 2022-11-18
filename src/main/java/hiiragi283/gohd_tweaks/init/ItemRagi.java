@@ -21,14 +21,13 @@ public class ItemRagi {
     public static void register() {
         ForgeRegistries.ITEMS.register(ItemRagiTicket);
     }
-    public static void registerRenders()
-    {
+
+    public static void registerRenders() {
         registerRender(ItemRagiTicket);
     }
 
     @SideOnly(Side.CLIENT)
-    public static void registerRender(Item item)
-    {
+    public static void registerRender(Item item) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + item.getUnlocalizedName(), "inventory"));
     }
 }
