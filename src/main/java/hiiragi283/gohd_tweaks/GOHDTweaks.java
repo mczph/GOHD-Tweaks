@@ -1,35 +1,37 @@
 package hiiragi283.gohd_tweaks;
 
-import hiiragi283.gohd_tweaks.init.ItemRagi;
+import hiiragi283.gohd_tweaks.init.RagiItem;
 import hiiragi283.gohd_tweaks.proxy.CommonProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class GOHDTweaks {
 
-    private static Logger logger;
-
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
+    private static Logger logger;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        ItemRagi.init();
-        ItemRagi.register();
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+        RagiItem.init();
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.registerRenders();
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        RagiItem.register();
     }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
+        //proxy.registerRenders();
     }
 }
