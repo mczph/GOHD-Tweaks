@@ -9,10 +9,9 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'idea'
 
 def mc_version = '1.12.2'
-version = "v0.0.1" as Object
+version = "v0.0.1"
 group = 'hiiragi283.gohd_tweaks' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'GOHD Tweaks'
 tasks.withType(JavaCompile) {
@@ -31,35 +30,46 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            args '--mod', 'dcs_climate', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                gohd_tweaks {
+                    source sourceSets.main
+                }
+            }
         }
 
         server {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            args '--mod', 'dcs_climate', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                gohd_tweaks {
+                    source sourceSets.main
+                }
+            }
         }
     }
-}
 
-repositories {
-    maven {
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+    repositories {
+        maven {
+            name = "Progwml6 maven"
+            url = "https://dvs1.progwml6.com/files/maven/"
+        }
+        maven {
+            name = "ModMaven"
+            url = "https://modmaven.dev"
+        }
     }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
+
+    dependencies {
+        minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+        compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
+        runtimeOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
     }
-}
 
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
-}
-
-jar {
-    manifest {
+    jar {
+        /*manifest {
         attributes(["Specification-Title"     : "GOHD Tweaks",
                     "Specification-Vendor"    : "Hiiragi283",
                     "Specification-Version"   : "v0.0.1", // We are version 1 of ourselves
@@ -68,8 +78,21 @@ jar {
                     "Implementation-Vendor"   : "Hiiragi283",
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                     'FMLAT'                   : 'gohd_at.cfg'])
+    }*/
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    sourceSets {
+        main {
+            output.resourcesDir = "src/generated/resources/"
+        }
+    }
+
+    copy {
+        delete {
+            delete "$buildDir/classes/java/main"
+        }
+        into "$buildDir/classes/java/main"
+        from sourceSets.main.resources
     }
 }
-jar.finalizedBy('reobfJar')
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }

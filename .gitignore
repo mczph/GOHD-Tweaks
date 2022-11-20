@@ -27,3 +27,5 @@ forge*changelog.txt
 *.jar
 *.txt
 *.zip
+
+src/generated
