@@ -39,16 +39,11 @@ public class ItemCommon extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
         if (this.isInCreativeTab(tab)) {
-            List<ItemStack> itms = getSubItemList();
-            subItems.addAll(itms);
+            List<ItemStack> list = Lists.newArrayList();
+            for (int i = 0; i < getMaxMeta() + 1; i++) {
+                list.add(new ItemStack(this, 1, i));
+            }
+            subItems.addAll(list);
         }
-    }
-
-    public List<ItemStack> getSubItemList() {
-        List<ItemStack> list = Lists.newArrayList();
-        for (int i = 0; i < getMaxMeta() + 1; i++) {
-            list.add(new ItemStack(this, 1, i));
-        }
-        return list;
     }
 }
