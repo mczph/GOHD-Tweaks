@@ -6,8 +6,6 @@ import net.minecraft.item.Item;
 public class ItemRagiTicket extends ItemCommon {
     private final int maxMeta;
 
-    public static final Item ItemRagiTicket = new ItemRagiTicket();
-
     public ItemRagiTicket() {
         super("ragi_ticket");
         maxMeta = 0;
