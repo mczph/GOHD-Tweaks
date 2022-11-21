@@ -6,8 +6,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static hiiragi283.gohd_tweaks.GOHDTweaks.ItemPartsMagic;
-import static hiiragi283.gohd_tweaks.GOHDTweaks.ItemRagiTicket;
+import static hiiragi283.gohd_tweaks.GOHDTweaks.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -17,8 +16,13 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void setModels() {
-        setModel(ItemPartsMagic, 0);
-        setModel(ItemPartsMagic, 1);
+        setModel(ItemBookSyntax, 0);
+        setModel(ItemBookSpawn, 0);
+        setModel(ItemPartsAssembly, 0);
+        setModel(ItemPartsAssembly, 1);
+        setModel(ItemPartsAssembly, 2);
+        setModel(ItemPartsAssembly, 3);
+        setModel(ItemPartsAssembly, 4);
         setModel(ItemRagiTicket, 0);
 
     }

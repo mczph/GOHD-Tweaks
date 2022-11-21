@@ -1,6 +1,8 @@
 package hiiragi283.gohd_tweaks;
 
-import hiiragi283.gohd_tweaks.items.ItemPartsMagic;
+import hiiragi283.gohd_tweaks.items.ItemBookSpawn;
+import hiiragi283.gohd_tweaks.items.ItemBookSyntax;
+import hiiragi283.gohd_tweaks.items.ItemPartsAssembly;
 import hiiragi283.gohd_tweaks.items.ItemRagiTicket;
 import hiiragi283.gohd_tweaks.proxy.CommonProxy;
 import net.minecraft.item.Item;
@@ -15,9 +17,11 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES, acceptedMinecraftVersions = Reference.MC_VERSIONS)
 public class GOHDTweaks {
 
-    public static final Item ItemPartsMagic = new ItemPartsMagic();
+    public static final Item ItemBookSpawn = new ItemBookSpawn();
+    public static final Item ItemBookSyntax = new ItemBookSyntax();
+    public static final Item ItemPartsAssembly = new ItemPartsAssembly();
     public static final Item ItemRagiTicket = new ItemRagiTicket();
-    private static final Logger logger = LogManager.getLogger(Reference.MOD_ID);
+    public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
     @Mod.Instance(Reference.MOD_ID)
@@ -26,7 +30,9 @@ public class GOHDTweaks {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
-        ForgeRegistries.ITEMS.register(ItemPartsMagic);
+        ForgeRegistries.ITEMS.registerAll(ItemBookSyntax);
+        ForgeRegistries.ITEMS.register(ItemBookSpawn);
+        ForgeRegistries.ITEMS.register(ItemPartsAssembly);
         ForgeRegistries.ITEMS.register(ItemRagiTicket);
         proxy.register();
     }
