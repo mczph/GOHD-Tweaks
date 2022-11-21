@@ -16,14 +16,15 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void setModels() {
-        setModel(ItemBookSyntax, 0);
         setModel(ItemBookSpawn, 0);
+        setModel(ItemBookSyntax, 0);
         setModel(ItemPartsAssembly, 0);
         setModel(ItemPartsAssembly, 1);
         setModel(ItemPartsAssembly, 2);
         setModel(ItemPartsAssembly, 3);
         setModel(ItemPartsAssembly, 4);
         setModel(ItemRagiTicket, 0);
+        setModel(ItemGroutFormed, 0);
 
     }
 
