@@ -2,6 +2,7 @@
   "variants": {
     "type=0": [{"model": "gohd_tweaks:grout_formed_table"}],
     "type=1": [{"model": "gohd_tweaks:grout_formed_basin"}],
-    "type=2": [{"model": "gohd_tweaks:grout_formed_channel"}]
+    "type=2": [{"model": "gohd_tweaks:grout_formed_channel"}],
+    "type=3": [{"model": "minecraft:clay"}]
   }
 }

@@ -7,20 +7,19 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 
 public class BlockCommon extends Block {
 
-    public static final PropertyInteger typeGOHD = PropertyInteger.create("type", 0, 15);
+    public static final PropertyInteger type4 = PropertyInteger.create("type", 0, 3);
+    public static final PropertyInteger type8 = PropertyInteger.create("type", 0, 7);
+    public static final PropertyInteger type16 = PropertyInteger.create("type", 0, 15);
     public final int maxMeta;
 
     public BlockCommon(Material Material, String ID, int max) {
         super(Material);
         this.setRegistryName(Reference.MOD_ID, ID);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(typeGOHD, 0));
+        //this.setDefaultState(this.blockState.getBaseState().withProperty(type16, 0));
         this.setUnlocalizedName(ID);
         this.maxMeta = max;
     }
@@ -29,34 +28,24 @@ public class BlockCommon extends Block {
         return 15;
     }
 
-    /*@Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }*/
-
     @Override
-    public IBlockState getStateFromMeta(int meta) {
-        int i = meta & 15;
-        IBlockState state = this.getDefaultState().withProperty(typeGOHD, i);
-        return state;
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, type16);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = state.getValue(PropertyInteger.create("type", 0, 15));
+        i = state.getValue(type16);
         if (i > maxMeta)
             i = maxMeta;
         return i;
     }
 
-    /*@Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state;
-    }*/
-
     @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, typeGOHD);
+    public IBlockState getStateFromMeta(int meta) {
+        int i = meta & 15;
+        IBlockState state = this.getDefaultState().withProperty(type16, i);
+        return state;
     }
 }

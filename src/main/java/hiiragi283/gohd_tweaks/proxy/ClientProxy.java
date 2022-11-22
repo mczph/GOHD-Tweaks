@@ -27,8 +27,6 @@ public class ClientProxy extends CommonProxy {
         setModel(ItemGroutFormed, 0);
         setModel(ItemGroutFormed, 1);
         setModel(ItemGroutFormed, 2);
-
-
     }
 
     public void register() {
