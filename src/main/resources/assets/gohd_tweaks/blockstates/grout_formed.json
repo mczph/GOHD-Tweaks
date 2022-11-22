@@ -1,16 +1,7 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-      "texture": "minecraft:blocks/clay",
-      "particle": "minecraft:blocks/clay"
-    }
-  },
   "variants": {
-    "type=0": [
-      {
-        "model": "gohd_tweaks:grout_formed"
-      }
-    ]
+    "type=0": [{"model": "gohd_tweaks:grout_formed_table"}],
+    "type=1": [{"model": "gohd_tweaks:grout_formed_basin"}],
+    "type=2": [{"model": "gohd_tweaks:grout_formed_channel"}]
   }
 }

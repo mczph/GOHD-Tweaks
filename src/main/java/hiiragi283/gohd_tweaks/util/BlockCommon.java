@@ -29,10 +29,10 @@ public class BlockCommon extends Block {
         return 15;
     }
 
-    @Override
+    /*@Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
-    }
+    }*/
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
@@ -50,10 +50,10 @@ public class BlockCommon extends Block {
         return i;
     }
 
-    @Override
+    /*@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state;
-    }
+    }*/
 
     @Override
     protected BlockStateContainer createBlockState() {

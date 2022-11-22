@@ -25,6 +25,9 @@ public class ClientProxy extends CommonProxy {
         setModel(ItemPartsAssembly, 4);
         setModel(ItemRagiTicket, 0);
         setModel(ItemGroutFormed, 0);
+        setModel(ItemGroutFormed, 1);
+        setModel(ItemGroutFormed, 2);
+
 
     }
 

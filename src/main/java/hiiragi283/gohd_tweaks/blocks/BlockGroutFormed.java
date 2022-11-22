@@ -12,10 +12,12 @@ public class BlockGroutFormed extends BlockCommon {
         this.setResistance(0.5F);
         this.setSoundType(SoundType.GROUND);
     }
+
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
+
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;

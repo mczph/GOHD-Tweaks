@@ -1,12 +1,10 @@
 package hiiragi283.gohd_tweaks;
 
-import hiiragi283.gohd_tweaks.blocks.*;
+import hiiragi283.gohd_tweaks.blocks.BlockGroutFormed;
 import hiiragi283.gohd_tweaks.items.*;
 import hiiragi283.gohd_tweaks.proxy.CommonProxy;
-import hiiragi283.gohd_tweaks.util.ItemBlockCommon;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,7 +19,7 @@ public class GOHDTweaks {
     public static final Block BlockGroutFormed = new BlockGroutFormed();
     public static final Item ItemBookSpawn = new ItemBookSpawn();
     public static final Item ItemBookSyntax = new ItemBookSyntax();
-    public static final Item ItemGroutFormed = new ItemBlockCommon(BlockGroutFormed);
+    public static final Item ItemGroutFormed = new ItemGroutFormed();
     public static final Item ItemPartsAssembly = new ItemPartsAssembly();
     public static final Item ItemRagiTicket = new ItemRagiTicket();
     public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
