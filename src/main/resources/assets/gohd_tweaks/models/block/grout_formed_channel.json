@@ -2,8 +2,8 @@
 	"credit1": "Original - Tineker's Construct",
 	"credit2": "Tweaked by Hiiraigi Russell Tsubasa",
 	"textures": {
-		"texture": "minecraft:blocks/clay",
-		"particle": "minecraft:blocks/clay"
+		"texture": "tconstruct:blocks/grout",
+		"particle": "tconstruct:blocks/grout"
 	},
 	"elements": [
 		{

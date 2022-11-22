@@ -7,6 +7,11 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+
+import java.util.Random;
 
 public class BlockCommon extends Block {
 
@@ -19,7 +24,7 @@ public class BlockCommon extends Block {
         super(Material);
         this.setRegistryName(Reference.MOD_ID, ID);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
-        //this.setDefaultState(this.blockState.getBaseState().withProperty(type16, 0));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(type16, 0));
         this.setUnlocalizedName(ID);
         this.maxMeta = max;
     }
@@ -28,6 +33,7 @@ public class BlockCommon extends Block {
         return 15;
     }
 
+    //Blockstate
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, type16);
@@ -48,4 +54,29 @@ public class BlockCommon extends Block {
         IBlockState state = this.getDefaultState().withProperty(type16, i);
         return state;
     }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return state;
+    }
+
+    //Item Drop
+    @Override
+    public int damageDropped(IBlockState state) {
+        int i = state.getValue(type16);
+        if (i > maxMeta)
+            i = maxMeta;
+        return i;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 1;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(state.getBlock());
+    }
+
 }
