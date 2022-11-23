@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 public class BlockGroutFormed extends BlockCommon {
     public BlockGroutFormed() {
         super(Material.GRASS, "grout_formed", 3);
-        //this.setDefaultState(this.blockState.getBaseState().withProperty(type4, 0));
         this.setHardness(3.0F);
         this.setResistance(0.5F);
         this.setSoundType(SoundType.GROUND);
