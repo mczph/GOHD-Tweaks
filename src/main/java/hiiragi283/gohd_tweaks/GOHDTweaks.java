@@ -4,11 +4,18 @@ import hiiragi283.gohd_tweaks.blocks.BlockGroutFormed;
 import hiiragi283.gohd_tweaks.items.*;
 import hiiragi283.gohd_tweaks.proxy.CommonProxy;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,5 +55,16 @@ public class GOHDTweaks {
         ForgeRegistries.ITEMS.register(ItemRagiTicket);
         //Modelの登録
         proxy.register();
+    }
+
+    @SubscribeEvent
+    public void onRightClickBlock(RightClickBlock event) {
+        ItemStack stack = event.getItemStack();
+        Item item = stack.getItem();
+        EntityPlayer player = event.getEntityPlayer();
+        World world = event.getWorld();
+        if (item == Items.BOOK && !world.isRemote) {
+            player.sendMessage(new TextComponentString("SUCCESS!"));
+        }
     }
 }
