@@ -15,6 +15,6 @@ item.parts_assembly.4.name=Speculative Processor Assembly
 item.ragi_ticket.0.name=Ragi Ticket
 
 # Text
-text.gohd_tweaks.decoration_line.name=§=============================================
+text.gohd_tweaks.decoration_line.name=§l=============================================
 text.gohd_tweaks.spawn.name=§aTeleport you to the spawn point!
 text.gohd_tweaks.syntax.name=§aSyntax and Reload!

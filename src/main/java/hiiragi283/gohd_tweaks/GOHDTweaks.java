@@ -4,11 +4,13 @@ import hiiragi283.gohd_tweaks.blocks.BlockGroutFormed;
 import hiiragi283.gohd_tweaks.items.*;
 import hiiragi283.gohd_tweaks.proxy.CommonProxy;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -41,9 +43,10 @@ public class GOHDTweaks {
     @Mod.Instance(Reference.MOD_ID)
     public static GOHDTweaks Instance;
 
+    //Pre-Initializationの段階で呼ばれるevent
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //このクラスとイベントに登録
+        //このクラスをイベントに登録
         MinecraftForge.EVENT_BUS.register(this);
         //Blockの登録
         ForgeRegistries.BLOCKS.register(BlockGroutFormed);
@@ -57,14 +60,35 @@ public class GOHDTweaks {
         proxy.register();
     }
 
+    //ブロックを右クリックすると呼ばれるevent
     @SubscribeEvent
     public void onRightClickBlock(RightClickBlock event) {
+        //各値の取得
         ItemStack stack = event.getItemStack();
         Item item = stack.getItem();
         EntityPlayer player = event.getEntityPlayer();
         World world = event.getWorld();
-        if (item == Items.BOOK && !world.isRemote) {
-            player.sendMessage(new TextComponentString("SUCCESS!"));
+        BlockPos pos = event.getPos();
+        IBlockState blockstate = world.getBlockState(pos);
+        Block block = blockstate.getBlock();
+        //サーバー側のみで実行
+        if (!world.isRemote) {
+            //デバッグ用
+            if (item.getRegistryName().toString().equals("minecraft:book")) {
+                player.sendMessage(new TextComponentTranslation("text.gohd_tweaks.decoration_line.name"));
+                //ブロックの翻訳名をチャットに表示
+                player.sendMessage(new TextComponentString("§lName:§r " + block.getPickBlock(blockstate, player.rayTrace(0,0), world, pos, player).getDisplayName()));
+                //ブロックのIDをチャットに表示
+                player.sendMessage(new TextComponentString("§lID:§r " + block.getRegistryName()));
+                //ブロックのHardnessをチャットに表示
+                player.sendMessage(new TextComponentString("§lHardness:§r " + block.getBlockHardness(blockstate, world, pos)));
+                //ブロックのResistanceをチャットに表示
+                player.sendMessage(new TextComponentString("§lResistance:§r " + block.getExplosionResistance(player)));
+                //適正ツールをチャットに表示
+                player.sendMessage(new TextComponentString("§lHarvest Tool:§r " + block.getHarvestTool(blockstate)));
+                //適正レベルをチャットに表示
+                player.sendMessage(new TextComponentString("§lHarvest Level:§r " + block.getHarvestLevel(blockstate)));
+            }
         }
     }
 }
