@@ -10,11 +10,13 @@ import static hiiragi283.gohd_tweaks.GOHDTweaks.*;
 
 public class ClientProxy extends CommonProxy {
 
+    //代入されたItemとmetaに応じてモデルファイルのパスを登録するメソッド
     @SideOnly(Side.CLIENT)
     public static void setModel(Item item, int meta) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName() + "_" + meta, "inventory"));
     }
 
+    //各Itemのモデルファイルのパスを指定するメソッド
     public void setModels() {
         setModel(ItemBookSpawn, 0);
         setModel(ItemBookSyntax, 0);
@@ -29,6 +31,7 @@ public class ClientProxy extends CommonProxy {
         setModel(ItemGroutFormed, 2);
     }
 
+    //Client側のProxyで行われる処理をまとめたメソッド
     public void register() {
         setModels();
     }
