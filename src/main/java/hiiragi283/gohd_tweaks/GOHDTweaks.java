@@ -103,9 +103,9 @@ public class GOHDTweaks {
                 Item itemOff = stackOff.getItem();
             }
             //プレイヤーと同じ座標にあるブロックのIDが"dcs_climate:dcs_fluidblock_hotspring"と一致する場合
-            if (block.getRegistryName().equals("dcs_climate:dcs_fluidblock_hotspring")) {
+            if (block.getRegistryName().toString().equals("dcs_climate:dcs_fluidblock_hotspring")) {
                 //プレイヤーに再生Iのバフを6秒与える
-                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:regeneration"), 220, 0));
+                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:regeneration"), 110, 0));
             }
         }
     }
