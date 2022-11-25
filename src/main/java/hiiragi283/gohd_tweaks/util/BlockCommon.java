@@ -8,8 +8,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 
 import java.util.Random;
 
@@ -52,8 +50,7 @@ public class BlockCommon extends Block {
         //type16をもとにBlockstateからメタデータを返す
         i = state.getValue(type16);
         //メタデータが最大値よりも大きい場合、最大値が代入される
-        if (i > maxMeta)
-            i = maxMeta;
+        if (i > maxMeta) i = maxMeta;
         return i;
     }
 
@@ -73,8 +70,7 @@ public class BlockCommon extends Block {
         //type16をもとにBlockstateからメタデータを返す
         int i = state.getValue(type16);
         //メタデータが最大値よりも大きい場合、最大値が代入される
-        if (i > maxMeta)
-            i = maxMeta;
+        if (i > maxMeta) i = maxMeta;
         return i;
     }
 
