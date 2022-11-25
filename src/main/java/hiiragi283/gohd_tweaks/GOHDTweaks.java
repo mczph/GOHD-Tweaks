@@ -72,6 +72,7 @@ public class GOHDTweaks {
         //各値の取得
         EntityPlayer player = event.player;
         World world = player.world;
+        //サーバー側のみで実行
         if (!world.isRemote) {
             player.sendMessage(new TextComponentTranslation("text.gohd_tweaks.decoration_line.name"));
             player.sendMessage(new TextComponentTranslation("text.gohd_tweaks.welcome.name"));
@@ -88,8 +89,8 @@ public class GOHDTweaks {
         BlockPos pos = player.getPosition();
         IBlockState blockstate = world.getBlockState(pos);
         Block block = blockstate.getBlock();
-        //20tickに1回実行する (負荷対策)
-        if (world.getWorldTime() % 20 == 0) {
+        //20tickに1回実行する (負荷対策) && サーバー側のみで実行
+        if (world.getWorldTime() % 20 == 0 && !world.isRemote) {
             //プレイヤーが利き手にアイテムを持っている場合
             if (Objects.isNull(player.getHeldItemMainhand())) {
                 //アイテムの値を取得する
@@ -104,8 +105,23 @@ public class GOHDTweaks {
             }
             //プレイヤーと同じ座標にあるブロックのIDが"dcs_climate:dcs_fluidblock_hotspring"と一致する場合
             if (block.getRegistryName().toString().equals("dcs_climate:dcs_fluidblock_hotspring")) {
-                //プレイヤーに再生Iのバフを6秒与える
+                //プレイヤーに再生Iのバフを5秒与える
                 player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:regeneration"), 110, 0));
+            }
+            //プレイヤーと同じ座標にあるブロックのIDが"dcs_climate:dcs_fluidblock_mazai"と一致する場合
+            if (block.getRegistryName().toString().equals("dcs_climate:dcs_fluidblock_mazai")) {
+                //プレイヤーに吐き気Iのバフを5秒与える
+                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:nausea"), 110, 0));
+            }
+            //プレイヤーと同じ座標にあるブロックのIDが"construct:blueslime"と一致する場合
+            if (block.getRegistryName().toString().equals("tconstruct:blueslime")) {
+                //プレイヤーに跳躍力IIIのバフを5秒与える
+                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:jump_boost"), 110, 2));
+            }
+            //プレイヤーと同じ座標にあるブロックのIDが"tconstruct:purpleslime"と一致する場合
+            if (block.getRegistryName().toString().equals("tconstruct:purpleslime")) {
+                //プレイヤーに幸運IIIのバフを5秒与える
+                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:luck"), 110, 2));
             }
         }
     }
@@ -124,7 +140,7 @@ public class GOHDTweaks {
         //サーバー側のみで実行
         if (!world.isRemote) {
             //デバッグ用
-            if (item.getRegistryName().toString().equals("minecraft:book")) {
+            if (item.getRegistryName().toString().equals("theoneprobe:creativeprobe")) {
                 player.sendMessage(new TextComponentTranslation("text.gohd_tweaks.decoration_line.name"));
                 //ブロックの翻訳名をチャットに表示
                 player.sendMessage(new TextComponentString("§lName:§r " + block.getPickBlock(blockstate, player.rayTrace(0, 0), world, pos, player).getDisplayName()));

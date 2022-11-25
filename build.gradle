@@ -11,7 +11,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'java-library'
 
-def mc_version = '1.12.2'
 version = "v0.1.0"
 group = 'hiiragi283.gohd_tweaks' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'GOHD_Tweaks'
@@ -70,9 +69,6 @@ minecraft {
 
     dependencies {
         minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-        compileOnly fg.deobf("mezz.jei:jei_1.12.2:4.16.1.302:api")
-        runtimeOnly fg.deobf("mezz.jei:jei_1.12.2:4.16.1.302")
-        compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17:api")
         implementation fileTree(dir: 'libs', include: '*.jar')
     }
 
